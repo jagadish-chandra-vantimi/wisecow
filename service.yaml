@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wisecow-service
+spec:
+  type: LoadBalancer  # Change to NodePort if running locally
+  selector:
+    app: wisecow
+  ports:
+  - protocol: TCP
+    port: 80  # The port to expose
+    targetPort: 4499  # The port your application listens on
