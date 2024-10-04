@@ -3,10 +3,10 @@ name: CI/CD for Wisecow Application
 on:
   push:
     branches:
-      - main  # or your main branch name
+      - main
   pull_request:
     branches:
-      - main  # or your main branch name
+      - main
 
 jobs:
   build:
@@ -17,6 +17,9 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
