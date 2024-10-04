@@ -35,10 +35,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create .kube directory
+        run: mkdir -p $HOME/.kube
+
       - name: Set up Kubeconfig
-        run: |
-          mkdir -p $HOME/.kube  # Create the .kube directory if it doesn't exist
-          echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+        run: echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
 
       - name: Deploy to Kubernetes
         run: |
